@@ -6,9 +6,14 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
 
 class ViewController: UIViewController {
-    var question_array=["Q.1 What is 82X7?"," Q.2 what is 93X46?","Q.3 what is 74X23?","Q.4 What is 64X31?","Q.5 What is 72X59"]
+    var ref : FIRDatabaseReference! = nil
+    
+    
+    var question_array=["82X7"," Q2 what is 93X46?","Q3 what is 74X23?","Q4 What is 64X31?","Q5 What is 72X59"]
     var answer_array=[574,4278,1656,1984,4248]
     var number_array=[32,83,56,34,6]
     var timerN = Timer ()
@@ -28,13 +33,16 @@ class ViewController: UIViewController {
     @IBOutlet var submitNumber: UIButton!
     @IBOutlet var numberText: UITextField!
     @IBOutlet var numberLabel: UILabel!
-
+    @IBOutlet var finishButton: UIButton!
+    
     @IBAction func finishButton(_ sender: AnyObject) {
         exit(0)
     }
-    @IBOutlet var finishButton: UIButton!
+   
     override func viewDidLoad() {
         super.viewDidLoad()
+         ref = FIRDatabase.database().reference()
+
         timerLabel.text = String(t)
        timer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(ViewController.time), userInfo: nil, repeats: true)
         createTimer()
@@ -68,13 +76,31 @@ class ViewController: UIViewController {
 
             if Int(answer.text!) == answer_array[i]
             {
+                let quno: String = question_array[i]
+                let answerEnt: Int = Int(answer.text!)!
+                let answerAct: Int = answer_array[i]
+                let userReference = ref.child("user").child("que").child(quno)
+                let values = ["entered Answer": answerEnt, "ActualAnswer":answerAct]
+                userReference.updateChildValues(values)
+               // self.ref.child("users").child(quno).setValue(["entered Answer": answerEnt, "ActualAnswer":answerAct])
                 m = m+1
                 i = i+1
             }
             else
             {
+                
+                let quno: String = question_array[i]
+                let answerEnt: Int = Int(answer.text!)!
+                let answerAct: Int = answer_array[i]
+                let userReference = ref.child("user").child("que").child(quno)
+                let values = ["entered Answer": answerEnt, "ActualAnswer":answerAct]
+                userReference.updateChildValues(values)
+//                let quno: String = question_array[n]
+//                let answerEnt: Int = Int(answer.text!)!
+//                let answerAct: Int = answer_array[n]
+//                self.ref.child("users").child(quno).setValue(["entered Answer": answerEnt, "ActualAnswer":answerAct])
                 i = i+1
-
+               
             }
             self.question.text = " Enter the Memorized Number"
             self.submitAnswerButton.isHidden = true
@@ -164,6 +190,16 @@ class ViewController: UIViewController {
             
         if  ksh ==  number_array[n]
         {
+            let quno: String = String(n)
+            let answerEnt: Int = ksh
+            let answerAct: Int = number_array [n]
+            let userReference = ref.child("user").child("mem").child(quno)
+            let values = ["entered Answer": answerEnt, "ActualAnswer":answerAct]
+            userReference.updateChildValues(values)
+//            let quno: String = "sub"
+//            let answerEnt: Int = ksh
+//            let answerAct: Int=number_array[n]
+//            self.ref.child("users").child(quno).setValue(["entered Answer": answerEnt, "ActualAnswer":answerAct])
             j = j+1
             n = n+1
             numberText.text = ""
@@ -172,10 +208,20 @@ class ViewController: UIViewController {
         }
         else
         {
+//            let quno: String = "sub"
+//            let answerEnt: Int = ksh
+//            let answerAct: Int=number_array[n]
+//            self.ref.child("users").child(quno).setValue(["entered Answer": answerEnt, "ActualAnswer":answerAct])
+            let quno: String = String(n)
+            let answerEnt: Int = ksh
+            let answerAct: Int = number_array [n]
+            let userReference = ref.child("user").child("mem").child(quno)
+            let values = ["entered Answer": answerEnt, "ActualAnswer":answerAct]
+            userReference.updateChildValues(values)
              n = n+1
             numberText.text = ""
             createTimer()
-        }
+        }                                                                                                                                                                                                                                
         }
         else if (n==4)
         
