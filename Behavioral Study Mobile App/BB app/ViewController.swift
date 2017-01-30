@@ -25,11 +25,17 @@ class ViewController: UIViewController {
     var timerCount = 0
     var timer = Timer()
     var user = ""
+    var mathQ = 0
+    var riskQ = 0
 
     //@IBOutlet var validanswerlabel: UILabel!
    
     @IBOutlet weak var userNameText: UITextField!
+    @IBOutlet weak var riskQuesLabel: UILabel!
+    @IBOutlet weak var mathQuesLabel: UILabel!
     @IBOutlet var question: UILabel!
+    @IBOutlet weak var riskQuesText: UITextField!
+    @IBOutlet weak var mathQuesText: UITextField!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet var answer: UITextField!
     @IBOutlet var timerLabel: UILabel!
@@ -38,14 +44,31 @@ class ViewController: UIViewController {
     @IBOutlet weak var startTestButton: UIButton!
     
     @IBAction func StartTest(_ sender: Any) {
+       
+        if (mathQuesText.text != "" && riskQuesText.text != "" && userNameText.text != "" )
+        {
         self.view.endEditing(true)
         user = userNameText.text!
+        mathQ = Int(mathQuesText.text!)!
+        riskQ = Int(riskQuesText.text!)!
+        riskQuesText.isHidden = true
+        mathQuesText.isHidden = true
+        riskQuesLabel.isHidden = true
+        mathQuesLabel.isHidden = true
         userNameText.isHidden = true
         userNameLabel.isHidden = true
         startTestButton.isHidden = true
         timerLabel.text = String(t)
         timer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(ViewController.time), userInfo: nil, repeats: true)
         createTimer()
+        }
+        else
+        {
+            self.aletControl()
+            //validanswerlabel.text = "Please enter valid answer"
+        }
+
+        
     }
     @IBOutlet var numberText: UITextField!
     @IBOutlet var numberLabel: UILabel!
@@ -208,7 +231,7 @@ class ViewController: UIViewController {
                 ksh = number.intValue
             }
             self.view.endEditing(true)
-        if(n<4)
+        if(n<mathQ)
         {
             
         if  ksh ==  number_array[n]
@@ -246,7 +269,7 @@ class ViewController: UIViewController {
             createTimer()
         }                                                                                                                                                                                                                                
         }
-        else if (n==4)
+        else if (n==mathQ)
         
         {
             if  Int(numberText.text!) ==  number_array[n]
