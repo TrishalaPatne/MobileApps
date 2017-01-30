@@ -8,7 +8,7 @@
 import UIKit
 import Firebase
 import FirebaseDatabase
-
+var ref : FIRDatabaseReference! = nil
 class ViewController: UIViewController {
     var ref : FIRDatabaseReference! = nil
     
@@ -24,13 +24,29 @@ class ViewController: UIViewController {
     var j = 0
     var timerCount = 0
     var timer = Timer()
+    var user = ""
 
     //@IBOutlet var validanswerlabel: UILabel!
+   
+    @IBOutlet weak var userNameText: UITextField!
     @IBOutlet var question: UILabel!
+    @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet var answer: UITextField!
     @IBOutlet var timerLabel: UILabel!
     @IBOutlet var submitAnswerButton: UIButton!
     @IBOutlet var submitNumber: UIButton!
+    @IBOutlet weak var startTestButton: UIButton!
+    
+    @IBAction func StartTest(_ sender: Any) {
+        self.view.endEditing(true)
+        user = userNameText.text!
+        userNameText.isHidden = true
+        userNameLabel.isHidden = true
+        startTestButton.isHidden = true
+        timerLabel.text = String(t)
+        timer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(ViewController.time), userInfo: nil, repeats: true)
+        createTimer()
+    }
     @IBOutlet var numberText: UITextField!
     @IBOutlet var numberLabel: UILabel!
     @IBOutlet var finishButton: UIButton!
@@ -42,10 +58,17 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
          ref = FIRDatabase.database().reference()
-
-        timerLabel.text = String(t)
-       timer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(ViewController.time), userInfo: nil, repeats: true)
-        createTimer()
+        
+        question.isHidden = true
+        finishButton.isHidden = true
+        question.isHidden = true
+        self.submitAnswerButton.isHidden = true
+        self.answer.isHidden = true
+        self.numberText.isHidden = true
+        self.submitNumber.isHidden = true
+        numberLabel.isHidden = true
+        numberLabel.isHidden = true
+     
 
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -79,7 +102,7 @@ class ViewController: UIViewController {
                 let quno: String = question_array[i]
                 let answerEnt: Int = Int(answer.text!)!
                 let answerAct: Int = answer_array[i]
-                let userReference = ref.child("user").child("que").child(quno)
+                let userReference = ref.child(user).child("que").child(quno)
                 let values = ["entered Answer": answerEnt, "ActualAnswer":answerAct]
                 userReference.updateChildValues(values)
                // self.ref.child("users").child(quno).setValue(["entered Answer": answerEnt, "ActualAnswer":answerAct])
@@ -92,7 +115,7 @@ class ViewController: UIViewController {
                 let quno: String = question_array[i]
                 let answerEnt: Int = Int(answer.text!)!
                 let answerAct: Int = answer_array[i]
-                let userReference = ref.child("user").child("que").child(quno)
+                let userReference = ref.child(user).child("que").child(quno)
                 let values = ["entered Answer": answerEnt, "ActualAnswer":answerAct]
                 userReference.updateChildValues(values)
 //                let quno: String = question_array[n]
@@ -193,7 +216,7 @@ class ViewController: UIViewController {
             let quno: String = String(n)
             let answerEnt: Int = ksh
             let answerAct: Int = number_array [n]
-            let userReference = ref.child("user").child("mem").child(quno)
+            let userReference = ref.child(user).child("mem").child(quno)
             let values = ["entered Answer": answerEnt, "ActualAnswer":answerAct]
             userReference.updateChildValues(values)
 //            let quno: String = "sub"
@@ -215,7 +238,7 @@ class ViewController: UIViewController {
             let quno: String = String(n)
             let answerEnt: Int = ksh
             let answerAct: Int = number_array [n]
-            let userReference = ref.child("user").child("mem").child(quno)
+            let userReference = ref.child(user).child("mem").child(quno)
             let values = ["entered Answer": answerEnt, "ActualAnswer":answerAct]
             userReference.updateChildValues(values)
              n = n+1
