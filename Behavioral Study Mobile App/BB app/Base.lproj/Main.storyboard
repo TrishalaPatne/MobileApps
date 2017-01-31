@@ -156,6 +156,51 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="circle.png" translatesAutoresizingMaskIntoConstraints="NO" id="dr7-OY-8RE">
+                                <rect key="frame" x="16" y="136" width="157" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="half circle.png" translatesAutoresizingMaskIntoConstraints="NO" id="ool-Sb-SHy">
+                                <rect key="frame" x="202" y="136" width="157" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QYJ-Fc-H8t">
+                                <rect key="frame" x="70" y="190" width="54" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tND-UJ-PwP">
+                                <rect key="frame" x="231" y="197" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G5F-vW-NaU">
+                                <rect key="frame" x="293" y="197" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CKy-mE-Lec">
+                                <rect key="frame" x="41" y="374" width="83" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="option A"/>
+                                <connections>
+                                    <action selector="optionAselect:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FZ4-fF-ZqX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i1U-ir-qjB">
+                                <rect key="frame" x="244" y="374" width="83" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="option B"/>
+                                <connections>
+                                    <action selector="optionBselect:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OZL-EH-buE"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.86772026286061865" green="0.71184884840255125" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -182,11 +227,18 @@
                     </view>
                     <connections>
                         <outlet property="answer" destination="Rai-Tw-aUl" id="3hU-Uj-wLb"/>
+                        <outlet property="circleImg" destination="dr7-OY-8RE" id="t6o-Wl-9tS"/>
+                        <outlet property="circleLabel" destination="QYJ-Fc-H8t" id="vwl-qI-bPw"/>
                         <outlet property="finishButton" destination="CoK-Dz-4xw" id="EjZ-js-kL8"/>
+                        <outlet property="halfCircleImg" destination="ool-Sb-SHy" id="eYB-DJ-off"/>
+                        <outlet property="hcLeftLabel" destination="tND-UJ-PwP" id="HN9-QR-Kjc"/>
+                        <outlet property="hcRightLable" destination="G5F-vW-NaU" id="8hb-2N-FM9"/>
                         <outlet property="mathQuesLabel" destination="7PN-yS-jED" id="ZcN-Wm-vqS"/>
                         <outlet property="mathQuesText" destination="mxl-UR-Sib" id="paS-Sg-Hwh"/>
                         <outlet property="numberLabel" destination="4dj-Ye-gZl" id="Cc2-rW-2N0"/>
                         <outlet property="numberText" destination="KPh-jt-DMa" id="tCQ-EP-rlp"/>
+                        <outlet property="optionAButton" destination="CKy-mE-Lec" id="XN3-cD-xpm"/>
+                        <outlet property="optionBbutton" destination="i1U-ir-qjB" id="ahH-I2-K0v"/>
                         <outlet property="question" destination="omq-Us-mk2" id="oPc-4v-aXn"/>
                         <outlet property="riskQuesLabel" destination="qZZ-dg-SpA" id="vw9-tA-wSr"/>
                         <outlet property="riskQuesText" destination="UxO-lD-QTQ" id="tge-eP-d8O"/>
@@ -203,4 +255,8 @@
             <point key="canvasLocation" x="90.400000000000006" y="-154.27286356821591"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="circle.png" width="229" height="220"/>
+        <image name="half circle.png" width="219" height="230"/>
+    </resources>
 </document>

@@ -13,6 +13,8 @@
 		6BF094271DCC06F800A704D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6BF094261DCC06F800A704D0 /* Assets.xcassets */; };
 		6BF0942A1DCC06F800A704D0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BF094281DCC06F800A704D0 /* LaunchScreen.storyboard */; };
 		C74DCC736C8B6345BB3C6E20 /* Pods_BB_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FC81161BC2CFD1F5D32E5C2 /* Pods_BB_app.framework */; };
+		D243B9EB1E4107FE00285C5A /* half circle.png in Resources */ = {isa = PBXBuildFile; fileRef = D243B9EA1E4107FE00285C5A /* half circle.png */; };
+		D243B9ED1E41098500285C5A /* circle.png in Resources */ = {isa = PBXBuildFile; fileRef = D243B9EC1E41098500285C5A /* circle.png */; };
 		D28805191E19FFC200856059 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D28805181E19FFC200856059 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +28,8 @@
 		6BF0942B1DCC06F800A704D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C9333C1BB4A397CF7D028A3 /* Pods-BB app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BB app.release.xcconfig"; path = "Pods/Target Support Files/Pods-BB app/Pods-BB app.release.xcconfig"; sourceTree = "<group>"; };
 		9FC81161BC2CFD1F5D32E5C2 /* Pods_BB_app.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BB_app.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D243B9EA1E4107FE00285C5A /* half circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "half circle.png"; path = "../../../half circle.png"; sourceTree = "<group>"; };
+		D243B9EC1E41098500285C5A /* circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = circle.png; path = ../../../circle.png; sourceTree = "<group>"; };
 		D28805181E19FFC200856059 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E6A66EF341C1AA8D6B6D715A /* Pods-BB app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BB app.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BB app/Pods-BB app.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -75,6 +79,8 @@
 				6BF094211DCC06F800A704D0 /* ViewController.swift */,
 				6BF094231DCC06F800A704D0 /* Main.storyboard */,
 				6BF094261DCC06F800A704D0 /* Assets.xcassets */,
+				D243B9EA1E4107FE00285C5A /* half circle.png */,
+				D243B9EC1E41098500285C5A /* circle.png */,
 				6BF094281DCC06F800A704D0 /* LaunchScreen.storyboard */,
 				6BF0942B1DCC06F800A704D0 /* Info.plist */,
 				D28805181E19FFC200856059 /* GoogleService-Info.plist */,
@@ -156,6 +162,8 @@
 			files = (
 				6BF0942A1DCC06F800A704D0 /* LaunchScreen.storyboard in Resources */,
 				D28805191E19FFC200856059 /* GoogleService-Info.plist in Resources */,
+				D243B9EB1E4107FE00285C5A /* half circle.png in Resources */,
+				D243B9ED1E41098500285C5A /* circle.png in Resources */,
 				6BF094271DCC06F800A704D0 /* Assets.xcassets in Resources */,
 				6BF094251DCC06F800A704D0 /* Main.storyboard in Resources */,
 			);
