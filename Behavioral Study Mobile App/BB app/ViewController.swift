@@ -15,13 +15,17 @@ class ViewController: UIViewController {
     
     var question_array=["82X7"," Q2 what is 93X46?","Q3 what is 74X23?","Q4 What is 64X31?","Q5 What is 72X59"]
     var answer_array=[574,4278,1656,1984,4248]
-    var number_array=[32,83,56,34,6]
+    var number_array=[32,83,56,34,6,22,78,90,21,54]
+    var riskCircle_array = [10, 20, 30, 40, 50]
+    var riskHCLeft_Array = [22, 32, 42, 52, 62]
+    var RiskHCRight = 0;
     var timerN = Timer ()
     var i = 0
     var m = 0
     var t = 0
     var n = 0
     var j = 0
+    var k = 0
     var timerCount = 0
     var timer = Timer()
     var user = ""
@@ -219,7 +223,8 @@ class ViewController: UIViewController {
     }
 
     @IBAction func submitNumber(_ sender: AnyObject) {
-        
+      if ( n<=mathQ-1)
+      {
         if (numberText.text != "")
         {
             let mem = numberText.text
@@ -232,25 +237,9 @@ class ViewController: UIViewController {
                 ksh = number.intValue
             }
             self.view.endEditing(true)
-        if(n<mathQ)
+        if(n<mathQ-1)
         {
             
-        if  ksh ==  number_array[n]
-        {
-            let quno: String = String(n)
-            let answerEnt: Int = ksh
-            let answerAct: Int = number_array [n]
-            let userReference = ref.child(user).child("mem").child(quno)
-            let values = ["entered Answer": answerEnt, "ActualAnswer":answerAct]
-            userReference.updateChildValues(values)
-            j = j+1
-            n = n+1
-            numberText.text = ""
-            createTimer()
-
-        }
-        else
-        {
             let quno: String = String(n)
             let answerEnt: Int = ksh
             let answerAct: Int = number_array [n]
@@ -260,30 +249,29 @@ class ViewController: UIViewController {
              n = n+1
             numberText.text = ""
             createTimer()
-        }                                                                                                                                                                                                                                
+            
         }
-        else if (n==mathQ)
+        else if (n==mathQ-1)
         
         {
-            if  Int(numberText.text!) ==  number_array[n]
-            {
-                j = j+1
+           numberText.text = ""
                 n = n+1
-            }
-            else
-            {
-                n = n+1
-                
-            }
-        
-             question.isHidden = false
+            let quno: String = String(n)
+            let answerEnt: Int = ksh
+            let answerAct: Int = number_array [n]
+            let userReference = ref.child(user).child("mem").child(quno)
+            let values = ["entered Answer": answerEnt, "ActualAnswer":answerAct]
+            userReference.updateChildValues(values)
+
+            /* question.isHidden = false
             submitNumber.isHidden = true
             numberText.isHidden = true
             numberLabel.isHidden = false
              question.text = "correct answer : " + String(m)
             numberLabel.text = "Number Memorized correctly: " + String(j)
-            finishButton.isHidden = false
-            riskQuestions()
+            finishButton.isHidden = false*/
+            createTimerRisk()
+            
         }
         }
        
@@ -292,16 +280,198 @@ class ViewController: UIViewController {
                 self.aletControl()
                 //validanswerlabel.text = "Please enter valid answer"
             }
+        }
+      else
+      {
+        if (numberText.text != "")
+      {
+        let mem = numberText.text
         
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        var ksh=0
+        if let number = formatter.number(from: mem!) {
+            // number is an instance of NSNumber
+            ksh = number.intValue
+        }
+        self.view.endEditing(true)
+        if(n<riskQ+mathQ-2)
+        {
+                let quno: String = String(n)
+                let answerEnt: Int = ksh
+                let answerAct: Int = number_array [n]
+                let userReference = ref.child(user).child("mem").child(quno)
+                let values = ["entered Answer": answerEnt, "ActualAnswer":answerAct]
+                userReference.updateChildValues(values)
+                // j = j+1
+                n = n+1
+                numberText.text = ""
+                createTimerRisk()
+            }
+        
+        else if (n==riskQ+mathQ-2)
+            
+        {
+            let quno: String = String(n)
+            let answerEnt: Int = ksh
+            let answerAct: Int = number_array [n]
+            let userReference = ref.child(user).child("mem").child(quno)
+            let values = ["entered Answer": answerEnt, "ActualAnswer":answerAct]
+            userReference.updateChildValues(values)
+                n = n+1
+             question.isHidden = true
+             submitNumber.isHidden = true
+             numberText.isHidden = true
+             numberLabel.isHidden = true
+            optionBbutton.isHidden = true
+            optionAButton.isHidden = true
+            hcRightLable.isHidden = true
+            hcLeftLabel.isHidden = true
+            circleLabel.isHidden = true
+            halfCircleImg.isHidden = true
+            circleImg.isHidden = true
+            // question.text = "correct answer : " + String(m)
+            // numberLabel.text = "Number Memorized correctly: " + String(j)
+             finishButton.isHidden = false
+        }
+      }
+        
+      else
+      {
+        self.aletControl()
+        //validanswerlabel.text = "Please enter valid answer"
+        }
+        
+        }
     }
     func riskQuestions()
     {
+        
+        
+        optionBbutton.isHidden = false
+        optionAButton.isHidden = false
+        hcRightLable.isHidden = false
+        hcLeftLabel.isHidden = false
+        circleLabel.isHidden = false
+        halfCircleImg.isHidden = false
+        circleImg.isHidden = false
     }
     
     @IBAction func optionBselect(_ sender: Any) {
+        let RiskQuesNo : String = String (k+1)
+        let Option_A: Int = riskCircle_array[k]
+        let Option_B: String = String (riskHCLeft_Array[k]) + "|0"
+        let userReference = ref.child(user).child("RiskQuestion").child(RiskQuesNo)
+        let values = ["Selected Anser": Option_B, "Option A":Option_A, "Option B" : Option_B] as [String : Any]
+        userReference.updateChildValues(values)
     }
     
     @IBAction func optionAselect(_ sender: Any) {
+       // self.view.endEditing(true)
+        let RiskQuesNo : String = String (k+1)
+        let Option_A: Int = riskCircle_array[k]
+        let Option_B: String = String (riskHCLeft_Array[k]) + "|0"
+        let userReference = ref.child(user).child("RiskQuestion").child(RiskQuesNo)
+        let values = ["Selected Anser": Option_A, "Option A":Option_A, "Option B" : Option_B] as [String : Any]
+        userReference.updateChildValues(values)
+    }
+    func RiskquestionTime()
+    {
+        optionBbutton.isHidden = false
+        optionAButton.isHidden = false
+        hcRightLable.isHidden = false
+        hcLeftLabel.isHidden = false
+        circleLabel.isHidden = false
+        halfCircleImg.isHidden = false
+        circleImg.isHidden = false
+
+        t = 30
+        timerLabel.isHidden = false
+        numberLabel.isHidden = true
+      //  question.text=question_array[i]
+        circleLabel.text = String (riskCircle_array [k])
+        hcLeftLabel.text = String (riskHCLeft_Array [k])
+        hcRightLable.text = String (RiskHCRight)
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(ViewController.timeRisk), userInfo: nil, repeats: true)
+        
+    }
+    func timeRisk()
+    {
+        
+        t -= 1
+        timerLabel.text = String(t)
+        if t<=0
+        {
+            if (timer.isValid)
+            {
+                timer.invalidate()
+            }
+            timerLabel.isHidden = true
+           
+            k += 1
+            optionBbutton.isHidden = true
+            optionAButton.isHidden = true
+            hcRightLable.isHidden = true
+            hcLeftLabel.isHidden = true
+            circleLabel.isHidden = true
+            halfCircleImg.isHidden = true
+            circleImg.isHidden = true
+            self.question.text = " Enter the Memorized Number"
+            self.submitAnswerButton.isHidden = true
+            self.answer.isHidden = true
+            self.numberText.isHidden = false
+            self.submitNumber.isHidden = false
+            answer.text = ""
+            
+        }
+        
+        
+    }
+    func createTimerRisk ()
+    {
+        optionBbutton.isHidden = true
+        optionAButton.isHidden = true
+        hcRightLable.isHidden = true
+        hcLeftLabel.isHidden = true
+        circleLabel.isHidden = true
+        halfCircleImg.isHidden = true
+        circleImg.isHidden = true
+        question.isHidden = true
+        submitNumber.isHidden = true
+        question.isHidden = true
+        finishButton.isHidden = true
+        timerCount = 4
+        
+        if (timerN.isValid)
+        {
+            timerN.invalidate ()
+        }
+        question.isHidden = false
+        finishButton.isHidden = true
+        question.text = "Memorize the Number"
+        self.submitAnswerButton.isHidden = true
+        self.answer.isHidden = true
+        self.numberText.isHidden = true
+        self.submitNumber.isHidden = true
+        numberLabel.isHidden = false
+        numberLabel.text = String (number_array [n])
+        
+        timerN = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(ViewController.updateTimerRisk), userInfo: nil, repeats: true)
+    }
+    
+    func updateTimerRisk ()
+    {
+        timerCount -= 1
+        if timerCount <= 0
+        {
+            RiskquestionTime()
+            
+            if (timerN.isValid)
+            {
+                timerN.invalidate()
+            }
+            
+        }
     }
 }
 
