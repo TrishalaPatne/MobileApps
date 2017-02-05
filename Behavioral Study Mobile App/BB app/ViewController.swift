@@ -13,8 +13,8 @@ class ViewController: UIViewController {
     var ref : FIRDatabaseReference! = nil
     
     
-    var question_array=["82X7"," Q2 what is 93X46?","Q3 what is 74X23?","Q4 What is 64X31?","Q5 What is 72X59"]
-    var answer_array=[574,4278,1656,1984,4248]
+    var question_array=["Q1 What is 82X7?"," Q2 What is 93X4?","Q3 What is 74X3?","Q4 What is 64X0?","Q5 What is 72X9"]
+    var answer_array=[574,372,222,0,648]
     var number_array=[32,83,56,34,6,22,78,90,21,54]
     var riskCircle_array = [10, 20, 30, 40, 50]
     var riskHCLeft_Array = [22, 32, 42, 52, 62]
@@ -50,7 +50,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet var answer: UITextField!
     @IBOutlet var timerLabel: UILabel!
-    @IBOutlet var submitAnswerButton: UIButton!
     @IBOutlet var submitNumber: UIButton!
     @IBOutlet weak var startTestButton: UIButton!
     
@@ -97,7 +96,6 @@ class ViewController: UIViewController {
         question.isHidden = true
         finishButton.isHidden = true
         question.isHidden = true
-        self.submitAnswerButton.isHidden = true
         self.answer.isHidden = true
         self.numberText.isHidden = true
         self.submitNumber.isHidden = true
@@ -121,7 +119,6 @@ class ViewController: UIViewController {
         t = 30
         timerLabel.isHidden = false
         self.question.isHidden = false
-        self.submitAnswerButton.isHidden = false
         self.answer.isHidden = false
         numberLabel.isHidden = true
         question.text=question_array[i]
@@ -139,12 +136,14 @@ class ViewController: UIViewController {
             {
                 timer.invalidate()
             }
+            if( answer.text != "")
+            {
             timerLabel.isHidden = true
                 self.view.endEditing(true)
             let quno: String = question_array[i]
             let answerEnt: Int = Int(answer.text!)!
             let answerAct: Int = answer_array[i]
-            let userReference = ref.child(user).child("que").child(quno)
+            let userReference = ref.child(user).child("Math Questions").child(quno)
             let values = ["entered Answer": answerEnt, "ActualAnswer":answerAct]
             userReference.updateChildValues(values)
                 if Int(answer.text!) == answer_array[i]
@@ -160,15 +159,43 @@ class ViewController: UIViewController {
                 }
             
                 self.question.text = " Enter the Memorized Number"
-                self.submitAnswerButton.isHidden = true
                 self.answer.isHidden = true
                 self.numberText.isHidden = false
                 self.submitNumber.isHidden = false
                 answer.text = ""
             
                 }
-        
-        
+            else
+            {
+                timerLabel.isHidden = true
+                self.view.endEditing(true)
+                let quno: String = question_array[i]
+                let answerEnt: Int = 0
+                let answerAct: Int = answer_array[i]
+                let userReference = ref.child(user).child("Math Questions").child(quno)
+                let values = ["entered Answer": answerEnt, "ActualAnswer":answerAct]
+                userReference.updateChildValues(values)
+                if Int(answer.text!) == answer_array[i]
+                {
+                    // self.ref.child("users").child(quno).setValue(["entered Answer": answerEnt, "ActualAnswer":answerAct])
+                    m = m+1
+                    i = i+1
+                }
+                else
+                {
+                    i = i+1
+                    
+                }
+                
+                self.question.text = " Enter the Memorized Number"
+                self.answer.isHidden = true
+                self.numberText.isHidden = false
+                self.submitNumber.isHidden = false
+                answer.text = ""
+            }
+            
+
+        }
     }
     func createTimer ()
     {
@@ -181,7 +208,6 @@ class ViewController: UIViewController {
         question.isHidden = false
         finishButton.isHidden = true
         question.text = "Memorize the Number"
-        self.submitAnswerButton.isHidden = true
         self.answer.isHidden = true
         self.numberText.isHidden = true
         self.submitNumber.isHidden = true
@@ -240,10 +266,10 @@ class ViewController: UIViewController {
         if(n<mathQ-1)
         {
             
-            let quno: String = String(n)
+            let quno: String = String(n+1)
             let answerEnt: Int = ksh
             let answerAct: Int = number_array [n]
-            let userReference = ref.child(user).child("mem").child(quno)
+            let userReference = ref.child(user).child("Number Memorization").child(quno)
             let values = ["entered Answer": answerEnt, "ActualAnswer":answerAct]
             userReference.updateChildValues(values)
              n = n+1
@@ -251,18 +277,17 @@ class ViewController: UIViewController {
             createTimer()
             
         }
-        else if (n==mathQ-1)
+        else if (n == mathQ-1)
         
         {
-           numberText.text = ""
-                n = n+1
-            let quno: String = String(n)
+            let quno: String = String(n+1)
             let answerEnt: Int = ksh
             let answerAct: Int = number_array [n]
-            let userReference = ref.child(user).child("mem").child(quno)
+            let userReference = ref.child(user).child("Number Memorization").child(quno)
             let values = ["entered Answer": answerEnt, "ActualAnswer":answerAct]
             userReference.updateChildValues(values)
-
+            n = n+1
+            numberText.text = ""
             /* question.isHidden = false
             submitNumber.isHidden = true
             numberText.isHidden = true
@@ -295,12 +320,12 @@ class ViewController: UIViewController {
             ksh = number.intValue
         }
         self.view.endEditing(true)
-        if(n<riskQ+mathQ-2)
+        if(n<riskQ+mathQ-1)
         {
-                let quno: String = String(n)
+                let quno: String = String(n+1)
                 let answerEnt: Int = ksh
                 let answerAct: Int = number_array [n]
-                let userReference = ref.child(user).child("mem").child(quno)
+                let userReference = ref.child(user).child("Number Memorization").child(quno)
                 let values = ["entered Answer": answerEnt, "ActualAnswer":answerAct]
                 userReference.updateChildValues(values)
                 // j = j+1
@@ -309,13 +334,13 @@ class ViewController: UIViewController {
                 createTimerRisk()
             }
         
-        else if (n==riskQ+mathQ-2)
+        else if (n == riskQ+mathQ-1)
             
         {
-            let quno: String = String(n)
+            let quno: String = String(n+1)
             let answerEnt: Int = ksh
             let answerAct: Int = number_array [n]
-            let userReference = ref.child(user).child("mem").child(quno)
+            let userReference = ref.child(user).child("Number Memorization").child(quno)
             let values = ["entered Answer": answerEnt, "ActualAnswer":answerAct]
             userReference.updateChildValues(values)
                 n = n+1
@@ -384,7 +409,7 @@ class ViewController: UIViewController {
         circleLabel.isHidden = false
         halfCircleImg.isHidden = false
         circleImg.isHidden = false
-
+        question.text = "Choose from following options";
         t = 30
         timerLabel.isHidden = false
         numberLabel.isHidden = true
@@ -417,7 +442,6 @@ class ViewController: UIViewController {
             halfCircleImg.isHidden = true
             circleImg.isHidden = true
             self.question.text = " Enter the Memorized Number"
-            self.submitAnswerButton.isHidden = true
             self.answer.isHidden = true
             self.numberText.isHidden = false
             self.submitNumber.isHidden = false
@@ -449,7 +473,6 @@ class ViewController: UIViewController {
         question.isHidden = false
         finishButton.isHidden = true
         question.text = "Memorize the Number"
-        self.submitAnswerButton.isHidden = true
         self.answer.isHidden = true
         self.numberText.isHidden = true
         self.submitNumber.isHidden = true
