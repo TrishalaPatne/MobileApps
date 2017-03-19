@@ -13,9 +13,11 @@ class ViewController: UIViewController {
     var ref : FIRDatabaseReference! = nil
     
     
-    var question_array=["Q1 What is 82X7?"," Q2 What is 93X4?","Q3 What is 74X3?","Q4 What is 64X0?","Q5 What is 72X9"]
-    var answer_array=[574,372,222,0,648]
-    var number_array=[32,83,56,34,6,22,78,90,21,54]
+    var question_first = 0
+    var question_second = 0
+    var ans = 0
+    var number = 0
+    var memlim = 0
     var riskCircle_array = [10, 20, 30, 40, 50]
     var riskHCLeft_Array = [22, 32, 42, 52, 62]
     var RiskHCRight = 0;
@@ -62,6 +64,7 @@ class ViewController: UIViewController {
         user = userNameText.text!
         mathQ = Int(mathQuesText.text!)!
         riskQ = Int(riskQuesText.text!)!
+        memlim = (mathQ+riskQ)/2
         riskQuesText.isHidden = true
         mathQuesText.isHidden = true
         riskQuesLabel.isHidden = true
@@ -116,17 +119,20 @@ class ViewController: UIViewController {
  
     func questionTime()
     {
+        question_first = Int(arc4random_uniform(4)) + 6
+        question_second = Int(arc4random_uniform(4))+16
         t = 30
         timerLabel.isHidden = false
         self.question.isHidden = false
         self.answer.isHidden = false
         numberLabel.isHidden = true
-        question.text=question_array[i]
+        question.text = String(question_first) + " X " + String(question_second) + "?"
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(ViewController.time), userInfo: nil, repeats: true)
         
     }
     func time()
     {
+        ans = question_first * question_second
         
         t -= 1
         timerLabel.text = String(t)
@@ -140,13 +146,13 @@ class ViewController: UIViewController {
             {
             timerLabel.isHidden = true
                 self.view.endEditing(true)
-            let quno: String = question_array[i]
+            let quno: String = String(question_first) + " X " + String(question_second) + "?"
             let answerEnt: Int = Int(answer.text!)!
-            let answerAct: Int = answer_array[i]
+            let answerAct: Int = ans
             let userReference = ref.child(user).child("Math Questions").child(quno)
             let values = ["entered Answer": answerEnt, "ActualAnswer":answerAct]
             userReference.updateChildValues(values)
-                if Int(answer.text!) == answer_array[i]
+                if Int(answer.text!) == ans
                 {
                     // self.ref.child("users").child(quno).setValue(["entered Answer": answerEnt, "ActualAnswer":answerAct])
                     m = m+1
@@ -169,13 +175,13 @@ class ViewController: UIViewController {
             {
                 timerLabel.isHidden = true
                 self.view.endEditing(true)
-                let quno: String = question_array[i]
+                let quno: String = String(question_first) + " X " + String(question_second) + "?"
                 let answerEnt: Int = 0
-                let answerAct: Int = answer_array[i]
+                let answerAct: Int = ans
                 let userReference = ref.child(user).child("Math Questions").child(quno)
                 let values = ["entered Answer": answerEnt, "ActualAnswer":answerAct]
                 userReference.updateChildValues(values)
-                if Int(answer.text!) == answer_array[i]
+                if Int(answer.text!) == ans
                 {
                     // self.ref.child("users").child(quno).setValue(["entered Answer": answerEnt, "ActualAnswer":answerAct])
                     m = m+1
@@ -212,8 +218,15 @@ class ViewController: UIViewController {
         self.numberText.isHidden = true
         self.submitNumber.isHidden = true
         numberLabel.isHidden = false
-        numberLabel.text = String (number_array [n])
-
+        if (n <= memlim-1)
+        {
+            number = Int(arc4random_uniform(90)) + 10
+        }
+        else
+        {
+            number = Int(arc4random_uniform(900000000)) + 10000000
+        }
+        numberLabel.text = String (number)
         timerN = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(ViewController.updateTimer), userInfo: nil, repeats: true)
     }
 
@@ -268,7 +281,7 @@ class ViewController: UIViewController {
             
             let quno: String = String(n+1)
             let answerEnt: Int = ksh
-            let answerAct: Int = number_array [n]
+            let answerAct: Int = number
             let userReference = ref.child(user).child("Number Memorization").child(quno)
             let values = ["entered Answer": answerEnt, "ActualAnswer":answerAct]
             userReference.updateChildValues(values)
@@ -282,7 +295,7 @@ class ViewController: UIViewController {
         {
             let quno: String = String(n+1)
             let answerEnt: Int = ksh
-            let answerAct: Int = number_array [n]
+            let answerAct: Int = number
             let userReference = ref.child(user).child("Number Memorization").child(quno)
             let values = ["entered Answer": answerEnt, "ActualAnswer":answerAct]
             userReference.updateChildValues(values)
@@ -324,7 +337,7 @@ class ViewController: UIViewController {
         {
                 let quno: String = String(n+1)
                 let answerEnt: Int = ksh
-                let answerAct: Int = number_array [n]
+                let answerAct: Int = number
                 let userReference = ref.child(user).child("Number Memorization").child(quno)
                 let values = ["entered Answer": answerEnt, "ActualAnswer":answerAct]
                 userReference.updateChildValues(values)
@@ -339,7 +352,7 @@ class ViewController: UIViewController {
         {
             let quno: String = String(n+1)
             let answerEnt: Int = ksh
-            let answerAct: Int = number_array [n]
+            let answerAct: Int = number
             let userReference = ref.child(user).child("Number Memorization").child(quno)
             let values = ["entered Answer": answerEnt, "ActualAnswer":answerAct]
             userReference.updateChildValues(values)
@@ -470,6 +483,14 @@ class ViewController: UIViewController {
         {
             timerN.invalidate ()
         }
+        if (n <= memlim-1)
+        {
+            number = Int(arc4random_uniform(90)) + 10
+        }
+        else
+        {
+            number = Int(arc4random_uniform(900000000)) + 10000000
+        }
         question.isHidden = false
         finishButton.isHidden = true
         question.text = "Memorize the Number"
@@ -477,7 +498,7 @@ class ViewController: UIViewController {
         self.numberText.isHidden = true
         self.submitNumber.isHidden = true
         numberLabel.isHidden = false
-        numberLabel.text = String (number_array [n])
+        numberLabel.text = String (number)
         
         timerN = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(ViewController.updateTimerRisk), userInfo: nil, repeats: true)
     }
