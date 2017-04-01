@@ -19,10 +19,10 @@ class ViewController: UIViewController {
     var ans = 0
     var number = 0
     var memlim = 0
-    var question_selector = 2
-    var riskCircle_array = [10, 20, 30, 40, 50]
-    var riskHCLeft_Array = [22, 32, 42, 52, 62]
-    var RiskHCRight = 0;
+    var question_selector = 0
+    var riskCircle = 0
+    var riskHCLeft = 0
+    var riskHCRight = 0
     var timerN = Timer ()
     var i = 0
     var m = 0
@@ -36,11 +36,15 @@ class ViewController: UIViewController {
     var mathQ = 0
     var riskQ = 0
     var Qs = 0;
-  
-
+    var a = 0
+    var b = 0
+    var c = 0
+    var s = 0
+    var finalPayment = 0
     //@IBOutlet var validanswerlabel: UILabel!
    
     @IBOutlet weak var instructText: UITextView!
+    @IBOutlet weak var paymentLable: UILabel!
     @IBOutlet weak var optionBbutton: UIButton!
     @IBOutlet weak var optionAButton: UIButton!
     @IBOutlet weak var hcRightLable: UILabel!
@@ -55,11 +59,15 @@ class ViewController: UIViewController {
     @IBOutlet weak var startTestButton: UIButton!
     
     @IBAction func StartTest(_ sender: Any) {
-       
+        s = mathQ + riskQ + 1
+        question_selector = Int(arc4random_uniform(UInt32(s)))
         instructText.isHidden = true
         timerLabel.isHidden = true
+        paymentLable.isHidden = true
         self.view.endEditing(true)
-       
+        let userReferenceP = ref.child(user).child("Deatails")
+        let values = ["Math Questions": mathQ, "Risk Questions":riskQ ," Number Memorization task":s-1]
+        userReferenceP.updateChildValues(values)
         memlim = (mathQ+riskQ)/2
         
         startTestButton.isHidden = true
@@ -80,7 +88,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
          ref = FIRDatabase.database().reference()
-        
+       
         instructText.isHidden = false
         timerLabel.isHidden = true
         question.isHidden = true
@@ -129,6 +137,36 @@ class ViewController: UIViewController {
             {
                 timer.invalidate()
             }
+            if (n == question_selector)
+            {
+                if Int(answer.text!) == ans
+                {
+                    finalPayment = payamt
+                }
+                else
+                {
+                    finalPayment = 0
+                }
+                
+                let qunoP: String = String(question_first) + " X " + String(question_second) + "?"
+                let answerEntP: Int = Int(answer.text!)!
+                let answerActP: Int = ans
+                let userReferenceP = ref.child(user).child("Deatails").child("Payment task").child("Math Question").child(qunoP)
+                let values = ["entered Answer": answerEntP, "ActualAnswer":answerActP]
+                userReferenceP.updateChildValues(values)
+                if Int(answer.text!) == ans
+                {
+                finalPayment = payamt
+                }
+                else
+                {
+                finalPayment = 0
+                }
+                 let userReferencePA = ref.child(user).child("Deatails").child("Payment task").child("Final Payment")
+                let valuesp = ["Payement" : finalPayment]
+                userReferencePA.updateChildValues(valuesp)
+             
+            }
            
             timerLabel.isHidden = true
                 self.view.endEditing(true)
@@ -166,7 +204,7 @@ class ViewController: UIViewController {
         self.numberText.isHidden = true
         self.submitNumber.isHidden = true
         numberLabel.isHidden = false
-        if (n <= memlim-1)
+        if (n <= memlim)
         {
             number = Int(arc4random_uniform(90)) + 10
         }
@@ -210,10 +248,10 @@ class ViewController: UIViewController {
     }
 
     @IBAction func submitNumber(_ sender: AnyObject) {
-        let k = mathQ + riskQ+1
+        let lim = mathQ + riskQ
          var ksh=0
         let mem = numberText.text
-        if (n<mathQ+riskQ-1)
+        if (n<mathQ+riskQ)
             {
                
               if (numberText.text != "")
@@ -238,12 +276,12 @@ class ViewController: UIViewController {
                 {
                     j=j+1;
                 }
-                question_selector = Int(arc4random_uniform(UInt32(k)))
-                if (question_selector < mathQ && n <= mathQ)
+                question_selector = Int(arc4random_uniform(UInt32(lim)))
+                if (question_selector <= mathQ && n < mathQ)
                 {
                     createTimer()
                 }
-                else
+                else if (k<riskQ)
                 {
                     createTimerRisk()
                     
@@ -289,13 +327,15 @@ class ViewController: UIViewController {
             circleLabel.isHidden = true
             halfCircleImg.isHidden = true
             circleImg.isHidden = true
+            paymentLable.isHidden = false
+            paymentLable.text = "Final Payment : " + String(finalPayment)
             question.text = "correct answer : " + String(m)
             numberLabel.text = "Number Memorized correctly: " + String(j)
             finishButton.isHidden = false
         }
         
     }
-    func riskQuestions()
+  /*  func riskQuestions()
     {
         
         
@@ -306,25 +346,63 @@ class ViewController: UIViewController {
         circleLabel.isHidden = false
         halfCircleImg.isHidden = false
         circleImg.isHidden = false
-    }
+    }*/
     
     @IBAction func optionBselect(_ sender: Any) {
         let RiskQuesNo : String = String (k+1)
-        let Option_A: Int = riskCircle_array[k]
-        let Option_B: String = String (riskHCLeft_Array[k]) + "|0"
+        let Option_A: Int = riskCircle
+        let Option_B: String = String (riskHCLeft) + "|" + String(riskHCRight)
         let userReference = ref.child(user).child("RiskQuestion").child(RiskQuesNo)
         let values = ["Selected Anser": Option_B, "Option A":Option_A, "Option B" : Option_B] as [String : Any]
         userReference.updateChildValues(values)
+        if (n == question_selector)
+        {
+        
+            let RiskQuesNoP : String = String (k+1)
+            let Option_AP: Int = riskCircle
+            let Option_BP: String = String (riskHCLeft) + "|" + String(riskHCRight)
+            let userReferenceP = ref.child(user).child("Deatails").child("Payment task").child("Risk Question").child(RiskQuesNoP)
+            let values = ["Selected Anser": Option_BP, "Option A":Option_AP, "Option B" : Option_BP] as [String : Any]
+            userReferenceP.updateChildValues(values)
+            if (n % 2 == 0)
+            {
+                finalPayment = riskHCRight
+            }
+            else
+            {
+                finalPayment = riskHCLeft
+            }
+            let userReferencePA = ref.child(user).child("Deatails").child("Payment task").child("Final Payment")
+            let valuesp = ["Payement" : finalPayment]
+            userReferencePA.updateChildValues(valuesp)
+            
+        }
     }
     
     @IBAction func optionAselect(_ sender: Any) {
        // self.view.endEditing(true)
         let RiskQuesNo : String = String (k+1)
-        let Option_A: Int = riskCircle_array[k]
-        let Option_B: String = String (riskHCLeft_Array[k]) + "|0"
+        let Option_A: Int = riskCircle
+        let Option_B: String = String (riskHCLeft) + "|" + String(riskHCRight)
         let userReference = ref.child(user).child("RiskQuestion").child(RiskQuesNo)
         let values = ["Selected Anser": Option_A, "Option A":Option_A, "Option B" : Option_B] as [String : Any]
         userReference.updateChildValues(values)
+        if (n == question_selector)
+        {
+            let RiskQuesNoP : String = String (k+1)
+            let Option_AP: Int = riskCircle
+            let Option_BP: String = String (riskHCLeft) + "|" + String(riskHCRight)
+            let userReferenceP = ref.child(user).child("Deatails").child("Payment task").child("Risk Question").child(RiskQuesNoP)
+            let values = ["Selected Anser": Option_AP, "Option A":Option_AP, "Option B" : Option_BP] as [String : Any]
+            userReferenceP.updateChildValues(values)
+            
+                finalPayment = riskCircle
+            
+            let userReferencePA = ref.child(user).child("Deatails").child("Payment task").child("Final Payment")
+            let valuesp = ["Payement" : finalPayment]
+            userReferencePA.updateChildValues(valuesp)
+            
+        }
     }
     func RiskquestionTime()
     {
@@ -340,9 +418,16 @@ class ViewController: UIViewController {
         timerLabel.isHidden = false
         numberLabel.isHidden = true
       //  question.text=question_array[i]
-        circleLabel.text = String (riskCircle_array [k])
-        hcLeftLabel.text = String (riskHCLeft_Array [k])
-        hcRightLable.text = String (RiskHCRight)
+        
+        a = Int(arc4random_uniform(10)) - 5
+        b = Int(arc4random_uniform(11))
+        c = Int(arc4random_uniform(4)) + 1
+        riskCircle = payamt + a
+        riskHCLeft = riskCircle - b
+        riskHCRight = riskCircle + b + c
+        circleLabel.text = String (riskCircle)
+        hcLeftLabel.text = String (riskHCLeft)
+        hcRightLable.text = String (riskHCRight)
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(ViewController.timeRisk), userInfo: nil, repeats: true)
         
     }
@@ -371,7 +456,7 @@ class ViewController: UIViewController {
             self.answer.isHidden = true
             self.numberText.isHidden = false
             self.submitNumber.isHidden = false
-            answer.text = ""
+           // answer.text = ""
             
         }
         
@@ -396,7 +481,7 @@ class ViewController: UIViewController {
         {
             timerN.invalidate ()
         }
-        if (n <= memlim-1)
+        if (n <= memlim)
         {
             number = Int(arc4random_uniform(90)) + 10
         }
