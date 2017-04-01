@@ -9,14 +9,14 @@
 /* Begin PBXBuildFile section */
 		6BF094201DCC06F800A704D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF0941F1DCC06F800A704D0 /* AppDelegate.swift */; };
 		6BF094221DCC06F800A704D0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF094211DCC06F800A704D0 /* ViewController.swift */; };
-		6BF094251DCC06F800A704D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BF094231DCC06F800A704D0 /* Main.storyboard */; };
 		6BF094271DCC06F800A704D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6BF094261DCC06F800A704D0 /* Assets.xcassets */; };
 		6BF0942A1DCC06F800A704D0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BF094281DCC06F800A704D0 /* LaunchScreen.storyboard */; };
 		C74DCC736C8B6345BB3C6E20 /* Pods_BB_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FC81161BC2CFD1F5D32E5C2 /* Pods_BB_app.framework */; };
-		D243B9EB1E4107FE00285C5A /* half circle.png in Resources */ = {isa = PBXBuildFile; fileRef = D243B9EA1E4107FE00285C5A /* half circle.png */; };
-		D243B9ED1E41098500285C5A /* circle.png in Resources */ = {isa = PBXBuildFile; fileRef = D243B9EC1E41098500285C5A /* circle.png */; };
-		D28805191E19FFC200856059 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D28805181E19FFC200856059 /* GoogleService-Info.plist */; };
-		D2F7FCDF1E8EEE77004C895A /* half circle1.png in Resources */ = {isa = PBXBuildFile; fileRef = D2F7FCDE1E8EEE77004C895A /* half circle1.png */; };
+		D27B34661E8F3F66001D1FF2 /* circle.png in Resources */ = {isa = PBXBuildFile; fileRef = D27B34651E8F3F66001D1FF2 /* circle.png */; };
+		D27B34681E8F3F76001D1FF2 /* half circle.png in Resources */ = {isa = PBXBuildFile; fileRef = D27B34671E8F3F76001D1FF2 /* half circle.png */; };
+		D27B346A1E8F3F95001D1FF2 /* half circle1.png in Resources */ = {isa = PBXBuildFile; fileRef = D27B34691E8F3F95001D1FF2 /* half circle1.png */; };
+		D27B346D1E8F4058001D1FF2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D27B346B1E8F4058001D1FF2 /* Main.storyboard */; };
+		D27B34731E8F4931001D1FF2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D27B34721E8F4931001D1FF2 /* GoogleService-Info.plist */; };
 		D2F7FCE11E8F05E7004C895A /* instructViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F7FCE01E8F05E7004C895A /* instructViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -24,16 +24,16 @@
 		6BF0941C1DCC06F800A704D0 /* BB app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BB app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BF0941F1DCC06F800A704D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6BF094211DCC06F800A704D0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		6BF094241DCC06F800A704D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6BF094261DCC06F800A704D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6BF094291DCC06F800A704D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6BF0942B1DCC06F800A704D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C9333C1BB4A397CF7D028A3 /* Pods-BB app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BB app.release.xcconfig"; path = "Pods/Target Support Files/Pods-BB app/Pods-BB app.release.xcconfig"; sourceTree = "<group>"; };
 		9FC81161BC2CFD1F5D32E5C2 /* Pods_BB_app.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BB_app.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D243B9EA1E4107FE00285C5A /* half circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "half circle.png"; path = "../../../half circle.png"; sourceTree = "<group>"; };
-		D243B9EC1E41098500285C5A /* circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = circle.png; path = ../../../circle.png; sourceTree = "<group>"; };
-		D28805181E19FFC200856059 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		D2F7FCDE1E8EEE77004C895A /* half circle1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "half circle1.png"; path = "../../../../Downloads/half circle1.png"; sourceTree = "<group>"; };
+		D27B34651E8F3F66001D1FF2 /* circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = circle.png; path = ../../../../circle.png; sourceTree = "<group>"; };
+		D27B34671E8F3F76001D1FF2 /* half circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "half circle.png"; path = "../../../../half circle.png"; sourceTree = "<group>"; };
+		D27B34691E8F3F95001D1FF2 /* half circle1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "half circle1.png"; path = "../../../../../Downloads/half circle1.png"; sourceTree = "<group>"; };
+		D27B346C1E8F4058001D1FF2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D27B34721E8F4931001D1FF2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D2F7FCE01E8F05E7004C895A /* instructViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = instructViewController.swift; sourceTree = "<group>"; };
 		E6A66EF341C1AA8D6B6D715A /* Pods-BB app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BB app.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BB app/Pods-BB app.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -82,14 +82,14 @@
 				6BF0941F1DCC06F800A704D0 /* AppDelegate.swift */,
 				6BF094211DCC06F800A704D0 /* ViewController.swift */,
 				D2F7FCE01E8F05E7004C895A /* instructViewController.swift */,
-				6BF094231DCC06F800A704D0 /* Main.storyboard */,
 				6BF094261DCC06F800A704D0 /* Assets.xcassets */,
-				D243B9EA1E4107FE00285C5A /* half circle.png */,
-				D2F7FCDE1E8EEE77004C895A /* half circle1.png */,
-				D243B9EC1E41098500285C5A /* circle.png */,
+				D27B346B1E8F4058001D1FF2 /* Main.storyboard */,
+				D27B34651E8F3F66001D1FF2 /* circle.png */,
+				D27B34691E8F3F95001D1FF2 /* half circle1.png */,
+				D27B34671E8F3F76001D1FF2 /* half circle.png */,
 				6BF094281DCC06F800A704D0 /* LaunchScreen.storyboard */,
+				D27B34721E8F4931001D1FF2 /* GoogleService-Info.plist */,
 				6BF0942B1DCC06F800A704D0 /* Info.plist */,
-				D28805181E19FFC200856059 /* GoogleService-Info.plist */,
 			);
 			path = "BB app";
 			sourceTree = "<group>";
@@ -167,12 +167,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				6BF0942A1DCC06F800A704D0 /* LaunchScreen.storyboard in Resources */,
-				D28805191E19FFC200856059 /* GoogleService-Info.plist in Resources */,
-				D243B9EB1E4107FE00285C5A /* half circle.png in Resources */,
-				D243B9ED1E41098500285C5A /* circle.png in Resources */,
+				D27B346D1E8F4058001D1FF2 /* Main.storyboard in Resources */,
+				D27B346A1E8F3F95001D1FF2 /* half circle1.png in Resources */,
 				6BF094271DCC06F800A704D0 /* Assets.xcassets in Resources */,
-				D2F7FCDF1E8EEE77004C895A /* half circle1.png in Resources */,
-				6BF094251DCC06F800A704D0 /* Main.storyboard in Resources */,
+				D27B34681E8F3F76001D1FF2 /* half circle.png in Resources */,
+				D27B34661E8F3F66001D1FF2 /* circle.png in Resources */,
+				D27B34731E8F4931001D1FF2 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,20 +240,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		6BF094231DCC06F800A704D0 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6BF094241DCC06F800A704D0 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		6BF094281DCC06F800A704D0 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				6BF094291DCC06F800A704D0 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		D27B346B1E8F4058001D1FF2 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D27B346C1E8F4058001D1FF2 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

@@ -13,7 +13,7 @@ var ref : FIRDatabaseReference! = nil
 class ViewController: UIViewController {
     var ref : FIRDatabaseReference! = nil
     
-    
+    var payamt = 0
     var question_first = 0
     var question_second = 0
     var ans = 0
@@ -40,6 +40,7 @@ class ViewController: UIViewController {
 
     //@IBOutlet var validanswerlabel: UILabel!
    
+    @IBOutlet weak var instructText: UITextView!
     @IBOutlet weak var optionBbutton: UIButton!
     @IBOutlet weak var optionAButton: UIButton!
     @IBOutlet weak var hcRightLable: UILabel!
@@ -47,13 +48,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var circleLabel: UILabel!
     @IBOutlet weak var halfCircleImg: UIImageView!
     @IBOutlet weak var circleImg: UIImageView!
-    @IBOutlet weak var userNameText: UITextField!
-    @IBOutlet weak var riskQuesLabel: UILabel!
-    @IBOutlet weak var mathQuesLabel: UILabel!
     @IBOutlet var question: UILabel!
-    @IBOutlet weak var riskQuesText: UITextField!
-    @IBOutlet weak var mathQuesText: UITextField!
-    @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet var answer: UITextField!
     @IBOutlet var timerLabel: UILabel!
     @IBOutlet var submitNumber: UIButton!
@@ -61,31 +56,17 @@ class ViewController: UIViewController {
     
     @IBAction func StartTest(_ sender: Any) {
        
-        if (mathQuesText.text != "" && riskQuesText.text != "" && userNameText.text != "" )
-        {
+        instructText.isHidden = true
         timerLabel.isHidden = true
         self.view.endEditing(true)
-        user = userNameText.text!
-        mathQ = Int(mathQuesText.text!)!
-        riskQ = Int(riskQuesText.text!)!
+       
         memlim = (mathQ+riskQ)/2
-        riskQuesText.isHidden = true
-        mathQuesText.isHidden = true
-        riskQuesLabel.isHidden = true
-        mathQuesLabel.isHidden = true
-        userNameText.isHidden = true
-        userNameLabel.isHidden = true
+        
         startTestButton.isHidden = true
-        //timerLabel.text = String(t)
+        
             
         createTimer()
-        }
-        else
-        {
-            self.aletControl()
-            //validanswerlabel.text = "Please enter valid answer"
-        }
-
+     
         
     }
     @IBOutlet var numberText: UITextField!
@@ -100,7 +81,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
          ref = FIRDatabase.database().reference()
         
-    
+        instructText.isHidden = false
         timerLabel.isHidden = true
         question.isHidden = true
         finishButton.isHidden = true
@@ -122,36 +103,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (mathQuesText.text != "" && riskQuesText.text != "" && userNameText.text != "" )
-        {
-            
-            user = userNameText.text!
-            mathQ = Int(mathQuesText.text!)!
-            riskQ = Int(riskQuesText.text!)!
-            memlim = (mathQ+riskQ)/2
-        }
-        else
-        {
-            self.aletControl()
-            //validanswerlabel.text = "Please enter valid answer"
-        }
 
-    }
-    func sttest() {
-        riskQuesText.isHidden = true
-        mathQuesText.isHidden = true
-        riskQuesLabel.isHidden = true
-        mathQuesLabel.isHidden = true
-        userNameText.isHidden = true
-        userNameLabel.isHidden = true
-        startTestButton.isHidden = true
-        //timerLabel.text = String(t)
-        timerLabel.isHidden = true
-        self.view.endEditing(true)
-        createTimer()
-        
-            }
     func questionTime()
     {
         question_first = Int(arc4random_uniform(4)) + 6

@@ -11,33 +11,55 @@ import UIKit
 
 class instructViewController: UIViewController {
 
-    override func viewDidLoad() {
+    @IBOutlet weak var paymentText: UITextField!
+    @IBOutlet weak var riskQuesText: UITextField!
+    @IBOutlet weak var mathQuesText: UITextField!
+    @IBOutlet weak var userNameText: UITextField!
+        override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
+  
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func startTestBut(_ sender: Any) {
-      
-    }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destviewcontrol : ViewController = segue.destination as! ViewController
+   
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) 
+        {
+            let destviewcontrol : ViewController = segue.destination as! ViewController
+            if (mathQuesText.text != "" && riskQuesText.text != "" && userNameText.text != "" )
+            {
+                destviewcontrol.user = userNameText.text!
+                destviewcontrol.riskQ = Int(riskQuesText.text!)!
+                destviewcontrol.mathQ = Int(mathQuesText.text!)!
+                destviewcontrol.payamt = Int(paymentText.text!)!
+            }
+            else
+            {
+                self.alertControl()
+                //validanswerlabel.text = "Please enter valid answer"
+            }    }
+    
+    func alertControl()
+    {
+        let alertController = UIAlertController(title: "Invalid Input", message: "Please input valid number!!", preferredStyle: .alert
+        )
+        // Create the actions
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
+            UIAlertAction in
+            NSLog("OK Pressed")
+        }
         
-        destviewcontrol.sttest()
+        // Add the actions
+        alertController.addAction(okAction)
+        
+        // Present the controller
+        self.present(alertController, animated: true, completion: nil)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
 
 }
