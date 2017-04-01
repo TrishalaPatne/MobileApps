@@ -9,6 +9,7 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 var ref : FIRDatabaseReference! = nil
+
 class ViewController: UIViewController {
     var ref : FIRDatabaseReference! = nil
     
@@ -18,6 +19,7 @@ class ViewController: UIViewController {
     var ans = 0
     var number = 0
     var memlim = 0
+    var question_selector = 2
     var riskCircle_array = [10, 20, 30, 40, 50]
     var riskHCLeft_Array = [22, 32, 42, 52, 62]
     var RiskHCRight = 0;
@@ -33,6 +35,8 @@ class ViewController: UIViewController {
     var user = ""
     var mathQ = 0
     var riskQ = 0
+    var Qs = 0;
+  
 
     //@IBOutlet var validanswerlabel: UILabel!
    
@@ -73,7 +77,7 @@ class ViewController: UIViewController {
         userNameLabel.isHidden = true
         startTestButton.isHidden = true
         //timerLabel.text = String(t)
-        
+            
         createTimer()
         }
         else
@@ -95,6 +99,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
          ref = FIRDatabase.database().reference()
+        
+    
         timerLabel.isHidden = true
         question.isHidden = true
         finishButton.isHidden = true
@@ -116,7 +122,36 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
     }
     
- 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (mathQuesText.text != "" && riskQuesText.text != "" && userNameText.text != "" )
+        {
+            
+            user = userNameText.text!
+            mathQ = Int(mathQuesText.text!)!
+            riskQ = Int(riskQuesText.text!)!
+            memlim = (mathQ+riskQ)/2
+        }
+        else
+        {
+            self.aletControl()
+            //validanswerlabel.text = "Please enter valid answer"
+        }
+
+    }
+    func sttest() {
+        riskQuesText.isHidden = true
+        mathQuesText.isHidden = true
+        riskQuesLabel.isHidden = true
+        mathQuesLabel.isHidden = true
+        userNameText.isHidden = true
+        userNameLabel.isHidden = true
+        startTestButton.isHidden = true
+        //timerLabel.text = String(t)
+        timerLabel.isHidden = true
+        self.view.endEditing(true)
+        createTimer()
+        
+            }
     func questionTime()
     {
         question_first = Int(arc4random_uniform(4)) + 6
@@ -142,8 +177,7 @@ class ViewController: UIViewController {
             {
                 timer.invalidate()
             }
-            if( answer.text != "")
-            {
+           
             timerLabel.isHidden = true
                 self.view.endEditing(true)
             let quno: String = String(question_first) + " X " + String(question_second) + "?"
@@ -156,12 +190,6 @@ class ViewController: UIViewController {
                 {
                     // self.ref.child("users").child(quno).setValue(["entered Answer": answerEnt, "ActualAnswer":answerAct])
                     m = m+1
-                    i = i+1
-                }
-                else
-                {
-                    i = i+1
-                    
                 }
             
                 self.question.text = " Enter the Memorized Number"
@@ -169,38 +197,6 @@ class ViewController: UIViewController {
                 self.numberText.isHidden = false
                 self.submitNumber.isHidden = false
                 answer.text = ""
-            
-                }
-            else
-            {
-                timerLabel.isHidden = true
-                self.view.endEditing(true)
-                let quno: String = String(question_first) + " X " + String(question_second) + "?"
-                let answerEnt: Int = 0
-                let answerAct: Int = ans
-                let userReference = ref.child(user).child("Math Questions").child(quno)
-                let values = ["entered Answer": answerEnt, "ActualAnswer":answerAct]
-                userReference.updateChildValues(values)
-                if Int(answer.text!) == ans
-                {
-                    // self.ref.child("users").child(quno).setValue(["entered Answer": answerEnt, "ActualAnswer":answerAct])
-                    m = m+1
-                    i = i+1
-                }
-                else
-                {
-                    i = i+1
-                    
-                }
-                
-                self.question.text = " Enter the Memorized Number"
-                self.answer.isHidden = true
-                self.numberText.isHidden = false
-                self.submitNumber.isHidden = false
-                answer.text = ""
-            }
-            
-
         }
     }
     func createTimer ()
@@ -262,23 +258,22 @@ class ViewController: UIViewController {
     }
 
     @IBAction func submitNumber(_ sender: AnyObject) {
-      if ( n<=mathQ-1)
-      {
-        if (numberText.text != "")
-        {
-            let mem = numberText.text
-            
-            let formatter = NumberFormatter()
-            formatter.numberStyle = .decimal
-            var ksh=0
+        let k = mathQ + riskQ+1
+         var ksh=0
+        let mem = numberText.text
+        if (n<mathQ+riskQ-1)
+            {
+               
+              if (numberText.text != "")
+              {
+                let formatter = NumberFormatter()
+                formatter.numberStyle = .decimal
+           
             if let number = formatter.number(from: mem!) {
                 // number is an instance of NSNumber
                 ksh = number.intValue
             }
             self.view.endEditing(true)
-        if(n<mathQ-1)
-        {
-            
             let quno: String = String(n+1)
             let answerEnt: Int = ksh
             let answerAct: Int = number
@@ -287,80 +282,54 @@ class ViewController: UIViewController {
             userReference.updateChildValues(values)
              n = n+1
             numberText.text = ""
-            createTimer()
-            
-        }
-        else if (n == mathQ-1)
-        
-        {
-            let quno: String = String(n+1)
-            let answerEnt: Int = ksh
-            let answerAct: Int = number
-            let userReference = ref.child(user).child("Number Memorization").child(quno)
-            let values = ["entered Answer": answerEnt, "ActualAnswer":answerAct]
-            userReference.updateChildValues(values)
-            n = n+1
-            numberText.text = ""
-            /* question.isHidden = false
-            submitNumber.isHidden = true
-            numberText.isHidden = true
-            numberLabel.isHidden = false
-             question.text = "correct answer : " + String(m)
-            numberLabel.text = "Number Memorized correctly: " + String(j)
-            finishButton.isHidden = false*/
-            createTimerRisk()
-            
-        }
-        }
+                if ksh == number
+                {
+                    j=j+1;
+                }
+                question_selector = Int(arc4random_uniform(UInt32(k)))
+                if (question_selector < mathQ && n <= mathQ)
+                {
+                    createTimer()
+                }
+                else
+                {
+                    createTimerRisk()
+                    
+                }
+      
+              }
        
             else
             {
                 self.aletControl()
                 //validanswerlabel.text = "Please enter valid answer"
             }
-        }
-      else
-      {
-        if (numberText.text != "")
-      {
-        let mem = numberText.text
-        
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        var ksh=0
-        if let number = formatter.number(from: mem!) {
-            // number is an instance of NSNumber
-            ksh = number.intValue
-        }
-        self.view.endEditing(true)
-        if(n<riskQ+mathQ-1)
-        {
-                let quno: String = String(n+1)
-                let answerEnt: Int = ksh
-                let answerAct: Int = number
-                let userReference = ref.child(user).child("Number Memorization").child(quno)
-                let values = ["entered Answer": answerEnt, "ActualAnswer":answerAct]
-                userReference.updateChildValues(values)
-                // j = j+1
-                n = n+1
-                numberText.text = ""
-                createTimerRisk()
-            }
-        
-        else if (n == riskQ+mathQ-1)
-            
+    }
+        else
         {
             let quno: String = String(n+1)
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .decimal
+
+            if let number = formatter.number(from: mem!) {
+                // number is an instance of NSNumber
+                ksh = number.intValue
+            }
+            self.view.endEditing(true)
             let answerEnt: Int = ksh
             let answerAct: Int = number
             let userReference = ref.child(user).child("Number Memorization").child(quno)
             let values = ["entered Answer": answerEnt, "ActualAnswer":answerAct]
             userReference.updateChildValues(values)
-                n = n+1
-             question.isHidden = true
-             submitNumber.isHidden = true
-             numberText.isHidden = true
-             numberLabel.isHidden = true
+            if ksh == number
+            {
+                j=j+1;
+            }
+            n = n+1
+            question.isHidden = false
+            submitNumber.isHidden = true
+            numberText.isHidden = true
+            numberLabel.isHidden = false
             optionBbutton.isHidden = true
             optionAButton.isHidden = true
             hcRightLable.isHidden = true
@@ -368,19 +337,11 @@ class ViewController: UIViewController {
             circleLabel.isHidden = true
             halfCircleImg.isHidden = true
             circleImg.isHidden = true
-            // question.text = "correct answer : " + String(m)
-            // numberLabel.text = "Number Memorized correctly: " + String(j)
-             finishButton.isHidden = false
-        }
-      }
-        
-      else
-      {
-        self.aletControl()
-        //validanswerlabel.text = "Please enter valid answer"
+            question.text = "correct answer : " + String(m)
+            numberLabel.text = "Number Memorized correctly: " + String(j)
+            finishButton.isHidden = false
         }
         
-        }
     }
     func riskQuestions()
     {
