@@ -41,6 +41,7 @@ class ViewController: UIViewController {
     var c = 0
     var s = 0
     var finalPayment = 0
+    var quecount = 0
     //@IBOutlet var validanswerlabel: UILabel!
    
     @IBOutlet weak var instructText: UITextView!
@@ -59,14 +60,14 @@ class ViewController: UIViewController {
     @IBOutlet weak var startTestButton: UIButton!
     
     @IBAction func StartTest(_ sender: Any) {
-        s = mathQ + riskQ + 1
+        s = mathQ + riskQ
         question_selector = Int(arc4random_uniform(UInt32(s)))
         instructText.isHidden = true
         timerLabel.isHidden = true
         paymentLable.isHidden = true
         self.view.endEditing(true)
         let userReferenceP = ref.child(user).child("Deatails")
-        let values = ["Math Questions": mathQ, "Risk Questions":riskQ ," Number Memorization task":s-1]
+        let values = ["Math Questions": mathQ, "Risk Questions":riskQ ," Number Memorization task":s]
         userReferenceP.updateChildValues(values)
         memlim = (mathQ+riskQ)/2
         
@@ -114,8 +115,9 @@ class ViewController: UIViewController {
 
     func questionTime()
     {
-        question_first = Int(arc4random_uniform(4)) + 6
-        question_second = Int(arc4random_uniform(4))+16
+        quecount = quecount + 1
+        question_first = Int(arc4random_uniform(7)) + 3
+        question_second = Int(arc4random_uniform(7))+16
         t = 30
         timerLabel.isHidden = false
         self.question.isHidden = false
@@ -251,7 +253,7 @@ class ViewController: UIViewController {
         let lim = mathQ + riskQ
          var ksh=0
         let mem = numberText.text
-        if (n<mathQ+riskQ)
+        if (n < mathQ+riskQ)
             {
                
               if (numberText.text != "")
@@ -277,7 +279,7 @@ class ViewController: UIViewController {
                     j=j+1;
                 }
                 question_selector = Int(arc4random_uniform(UInt32(lim)))
-                if (question_selector <= mathQ && n < mathQ)
+                if (question_selector < mathQ && quecount <= mathQ)
                 {
                     createTimer()
                 }
