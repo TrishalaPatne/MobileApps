@@ -113,13 +113,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L0j-WP-LDa">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L0j-WP-LDa">
                                 <rect key="frame" x="74" y="294" width="222" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="1" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="RNo-sG-2Oz">
+                                <rect key="frame" x="1" y="42" width="375" height="459"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="timer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lh8-rQ-kQM">
                                 <rect key="frame" x="317" y="28" width="42" height="21"/>
                                 <constraints>
@@ -171,7 +178,7 @@
                                 <rect key="frame" x="207" y="136" width="157" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="circle.png" translatesAutoresizingMaskIntoConstraints="NO" id="dr7-OY-8RE">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="circle.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="dr7-OY-8RE">
                                 <rect key="frame" x="0.0" y="136" width="157" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -214,20 +221,10 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CKy-mE-Lec">
-                                <rect key="frame" x="41" y="374" width="83" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Option A"/>
-                                <connections>
-                                    <action selector="optionAselect:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FZ4-fF-ZqX"/>
-                                    <action selector="submitNumber:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EtY-CO-MK0"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i1U-ir-qjB">
                                 <rect key="frame" x="244" y="374" width="83" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                 <state key="normal" title="Option B"/>
                                 <connections>
                                     <action selector="optionBselect:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OZL-EH-buE"/>
@@ -245,33 +242,31 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="j1J-eE-KaP">
-                                <rect key="frame" x="60" y="28" width="255" height="468"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <mutableString key="text">Please read following instructions Instructions:
-
-1. You will given number of periods containing either maths question or risk question along with number memorization task.
-2. You will be given 4 second to memorize the number.
-3. Solve math problem or choose any option among risk question.
-4. You can change your answer till 30 seconds after that it will be automatically submitted.
-5. Enter the memorized number and click ‘Enter’ to move forward with next question.
-7. When task is finished, result will be displayed containing correct answer and correctly memorized number.
-8.You cannot go back or move forward in this application. Questions will be automatically changed after 30 seconds.
-
-All the best! Please click ‘start’ button to start the test.</mutableString>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vYt-9l-KeW">
                                 <rect key="frame" x="137" y="519" width="97" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                <state key="normal" title="Start Test"/>
+                                <state key="normal" title="Start"/>
                                 <connections>
                                     <action selector="StartTest:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Tmv-yl-2DB"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hkH-Rh-WnX">
+                                <rect key="frame" x="37" y="374" width="105" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <state key="normal" title="Option A"/>
+                                <connections>
+                                    <action selector="optionA:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Qzw-0P-RDD"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KFU-d7-fTv">
+                                <rect key="frame" x="27" y="330" width="307" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.86772026286061865" green="0.71184884840255125" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -301,14 +296,15 @@ All the best! Please click ‘start’ button to start the test.</mutableString>
                         <outlet property="answer" destination="Rai-Tw-aUl" id="3hU-Uj-wLb"/>
                         <outlet property="circleImg" destination="dr7-OY-8RE" id="t6o-Wl-9tS"/>
                         <outlet property="circleLabel" destination="QYJ-Fc-H8t" id="vwl-qI-bPw"/>
+                        <outlet property="finalPaidAmountlable" destination="KFU-d7-fTv" id="m8U-fb-DWQ"/>
                         <outlet property="finishButton" destination="CoK-Dz-4xw" id="EjZ-js-kL8"/>
                         <outlet property="halfCircleImg" destination="ool-Sb-SHy" id="eYB-DJ-off"/>
                         <outlet property="hcLeftLabel" destination="tND-UJ-PwP" id="HN9-QR-Kjc"/>
                         <outlet property="hcRightLable" destination="G5F-vW-NaU" id="8hb-2N-FM9"/>
-                        <outlet property="instructText" destination="j1J-eE-KaP" id="A3V-3d-6gc"/>
+                        <outlet property="instructText" destination="RNo-sG-2Oz" id="AmK-6u-a4J"/>
                         <outlet property="numberLabel" destination="4dj-Ye-gZl" id="Cc2-rW-2N0"/>
                         <outlet property="numberText" destination="KPh-jt-DMa" id="tCQ-EP-rlp"/>
-                        <outlet property="optionAButton" destination="CKy-mE-Lec" id="XN3-cD-xpm"/>
+                        <outlet property="optionAButton" destination="hkH-Rh-WnX" id="X1Q-54-3nJ"/>
                         <outlet property="optionBbutton" destination="i1U-ir-qjB" id="ahH-I2-K0v"/>
                         <outlet property="paymentLable" destination="L0j-WP-LDa" id="I1L-vw-7rT"/>
                         <outlet property="question" destination="omq-Us-mk2" id="oPc-4v-aXn"/>
@@ -323,7 +319,7 @@ All the best! Please click ‘start’ button to start the test.</mutableString>
         </scene>
     </scenes>
     <resources>
-        <image name="circle.png" width="229" height="220"/>
+        <image name="circle.jpg" width="1500" height="1500"/>
         <image name="half circle1.png" width="225" height="225"/>
     </resources>
 </document>
